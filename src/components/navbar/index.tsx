@@ -13,16 +13,20 @@ interface StyledLinkProps {
 interface StyleProps {
   color?: string;
 }
-
-const Navbar = () => {
-  
+interface Props{
+  menu: any[];
+  color: string;
+}
+const Navbar = (props: Props) => {
+  const { menu, color } = props;
   return (
     <Wrapper>
      <MenuWrapper>
-        <Item><StyledLink href="#accueil">Accueil</StyledLink></Item>
-        <Item><StyledLink href="#services">Nos Services</StyledLink></Item>
-        <Item><StyledLink href="/">Plat du jour</StyledLink></Item>
-        <Item><StyledLink href="/">A propos de nous</StyledLink></Item>
+     {menu.map(
+                (element, index) => (
+                  <Item key={index}><StyledLink color={color} href={element.href} >{element.label}</StyledLink></Item>
+                )
+              )}
       <CustomButton onClick={() => window.location.href="https://web.whatsapp.com/send?phone=+221767205782&text=%22Message%22&app_absent=0"}>
         <span>Nous contacter</span>
         <FaWhatsapp size={20} color="#25D366"/>
@@ -59,7 +63,7 @@ const Item = styled.li`
 
 const StyledLink = styled(Link)<StyledLinkProps>`
   /* color: ${({ active, color }) => (active ? colors.yellow : color)}; */
-  color: ${colors.black};
+  color: ${({ color }) => color };
   transition: all ease-in 0.3s;
   width: 100%;
   text-decoration: none;
@@ -68,7 +72,7 @@ const StyledLink = styled(Link)<StyledLinkProps>`
     display: block;
     width: 0;
     height: 2px;
-    background: #000;
+    background: ${({color}) => color};
     transition: width .3s;
   }
   &:hover::after {

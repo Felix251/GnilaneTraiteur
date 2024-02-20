@@ -39,12 +39,12 @@ const Content = styled.div`
      flex-direction: column;
     }
 `;
-const Title = styled.h1`
+export const Title = styled.h1`
   font-style: italic;
   text-transform: uppercase;
   font-size: 40px;
   text-align: center;
-  margin: 20px 0;
+  /* margin: 20px 0; */
 `;
 const Wrapper = styled.div`
    padding: 10px 100px;
@@ -59,5 +59,6 @@ const Wrapper = styled.div`
      align-items: center;
      justify-content: center;
      padding: 10px;
+     margin: 50px 0 ;
     }
 `;

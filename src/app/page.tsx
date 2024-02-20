@@ -5,6 +5,7 @@ import Header from '@/components/header';
 import Description from '@/components/Description';
 import Services from '@/components/services';
 import { useEffect } from 'react';
+import AboutUs from '@/components/about-us';
 
 export default function Home() {
 
@@ -14,6 +15,7 @@ export default function Home() {
         <Header/>
         <Description/>
         <Services/>
+        <AboutUs/>
       </Wrapper>
      {/* <WhatsAppLogo>
        <FaWhatsapp size={40} color="#25D366"/>

@@ -16,6 +16,7 @@ import { motion } from 'framer-motion';
 
 interface HeaderProps {
   background: string;
+  color: string;
   scrollY: number;
   isHome?: boolean;
 }
@@ -37,26 +38,49 @@ const Header = () => {
     () => ( scrollY > 0 ? colors.white : colors.transparent),
     [pathname, scrollY]
   );
+  const color = useMemo(
+    () => ( scrollY > 0 ? colors.black : colors.white),
+    [pathname, scrollY]
+  );
+  const menu = [
+    {
+      label:"Accueil",
+      href:"#accueil",
+    },
+    {
+      label:"Nos Services",
+      href:"#services",
+    },
+    {
+      label:"Plat du jour",
+      href:"#platDuJour",
+    },
+    {
+      label:"A propos de nous",
+      href:"#aboutus",
+    },
+  ];
   return (
-    <Wrapper background={background} scrollY={scrollY}>
+    <Wrapper color={color} background={background} scrollY={scrollY}>
         <Image
           src={logo}
           alt="logo"
           width={100} 
           height={100} 
         />
-        <Navbar/>
+        <Navbar color={color} menu={menu}/>
           { !isOpened &&
             <BarIcon onClick={()=> setisOpened(true)}> <FaBars size={26} /> </BarIcon>
           } 
         <Backdrop isOpened={isOpened}>
           <Menu isOpened={isOpened}>
-          <CloseIcon onClick={()=> setisOpened(false)}><IoMdClose size={26}/> </CloseIcon> 
+          <CloseIcon onClick={()=> setisOpened(false)}><IoMdClose size={26} color={colors.white}/> </CloseIcon> 
             <MenuWrapper>
-                <Item><StyledLink href="#accueil">Accueil</StyledLink></Item>
-                <Item><StyledLink href="#services">Nos Services</StyledLink></Item>
-                <Item><StyledLink href="/">Plat du jour</StyledLink></Item>
-                <Item><StyledLink href="/">A propos de nous</StyledLink></Item>
+              {menu.map(
+                (element, index) => (
+                  <Item key={index}><StyledLink href={element.href} onClick={()=> setisOpened(false)}>{element.label}</StyledLink></Item>
+                )
+              )}
             </MenuWrapper>
           </Menu>
         </Backdrop>
@@ -92,7 +116,7 @@ const Menu = styled(motion.div)<MenuProps>`
   top: 0;
   right: 0;
   padding-top: 100px;
-  background-color: rgba(0, 0, 0, 0.19);
+  background-color: rgba(0, 0, 0, 0.5);
   height: 100vh;
   width: 100vw;
   overflow-y: scroll;
@@ -103,7 +127,7 @@ const MenuWrapper = styled.ul<StyleProps>`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: sap;
+  /* justify-content: sap; */
   align-items: center;
   gap: 20px;
   font-family: Raleway;
@@ -117,13 +141,16 @@ const Item = styled.li`
  display: flex;
  align-items: center;
  margin-right: 20px;
+ margin-bottom: 20px;
  border-bottom: 1px solid white;
  
 `;
 
 const StyledLink = styled(Link)<StyledLinkProps>`
   /* color: ${({ active, color }) => (active ? colors.yellow : color)}; */
-  color: ${colors.black};
+  color: ${colors.white};
+  font-weight: bold;
+  font-size: 20px;
   transition: all ease-in 0.3s;
   width: 100%;
   text-decoration: none;
@@ -146,6 +173,7 @@ const Wrapper = styled.header<HeaderProps>`
     position: fixed;
     top: 0;
     background-color: ${({ background }) => background};
+    color: ${({ color }) => color};
     box-shadow: ${({ background, scrollY }) =>
     background === colors.white && scrollY > 0 ? "0px 19px 15px -15px rgba(0,0,0,0.23)" : "none"};
     transition: all 0.2s ease-in-out;
