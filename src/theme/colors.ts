@@ -19,4 +19,7 @@ export const colors = {
   cancel: "#ff0000",
   primary: "#2152A1",//f8f8f8 f3f3f3
   secondary: "#DFE14A",
+  text: "#565360",
+  label: "#908E9B",
+  disable: "#E1DFE9",
 };
