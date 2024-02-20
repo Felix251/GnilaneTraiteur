@@ -92,7 +92,7 @@ const Wrapper = styled.div`
   padding: 25% 100px 30px;
   color: ${colors.white};
   width: 100vw;
-  height: 120vh;
+ // height: 120vh;
   position: relative;
   top: -20%;
   /* background-color: ${colors.white}; */
@@ -105,8 +105,8 @@ const Wrapper = styled.div`
      display : flex;
      align-items: center;
      justify-content: center;
-     padding: 500px 10px 30px;
-     margin-bottom: 100px;
+     padding: 400px 10px 30px;
+    // margin-bottom: 100px;
     }
 `;
 const TextAndButton = styled.div`
